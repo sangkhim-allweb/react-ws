@@ -10,9 +10,8 @@ function App() {
         const socket = new SockJS('http://localhost:8080/api/ws');
         stompClient.current = Stomp.over(socket);
         stompClient.current.connect({
-            login: "sangkhim",
-            passcode: "123456",
-            Authorization: "Basic dXNlcjE6YWJjZDEyMzQ="
+            username: "sangkhim",
+            password: "123456"
         }, (frame) => {
             console.log('Connected: ' + frame);
             stompClient.current.subscribe('/topic/roomName', (message) => {
