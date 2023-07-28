@@ -9,7 +9,11 @@ function App() {
     useEffect(() => {
         const socket = new SockJS('http://localhost:8080/api/ws');
         stompClient.current = Stomp.over(socket);
-        stompClient.current.connect({}, (frame) => {
+        stompClient.current.connect({
+            login: "sangkhim",
+            passcode: "123456",
+            Authorization: "Basic dXNlcjE6YWJjZDEyMzQ="
+        }, (frame) => {
             console.log('Connected: ' + frame);
             stompClient.current.subscribe('/topic/roomName', (message) => {
                 console.log('room: ' + message.body);
@@ -22,7 +26,7 @@ function App() {
 
     const sendMessage = () => {
         stompClient.current.send("/app/topic/roomName", {}, "Room");
-        stompClient.current.send("/app/user/samnang", {}, "User");
+        stompClient.current.send("/app/user/sangkhim", {}, "User");
     };
 
     return (
